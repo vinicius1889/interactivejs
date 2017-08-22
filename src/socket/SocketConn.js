@@ -17,7 +17,10 @@ export default class SocketConn{
             client.on('event', function(data){
 
             });
-            // client.on('disconnect', function(){});
+
+            client.on('disconnect', function(){
+
+            });
         })
     }
 

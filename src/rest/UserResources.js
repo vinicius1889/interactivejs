@@ -1,3 +1,4 @@
+import {EnumCode} from "../utils/Utils";
 
 export default class UserService{
 
@@ -14,7 +15,7 @@ export default class UserService{
 
     getOnlineUsers(){
         this.server.get('/user/online',(req, res) => {
-            res.writeHead(200, {'Content-Type': 'application/json'});
+            res.writeHead(EnumCode.OK.code, {'Content-Type': 'application/json'});
             res.end("[]");
         })
     }

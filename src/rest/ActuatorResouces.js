@@ -1,3 +1,5 @@
+import {RestUtils} from "../utils/Utils"
+
 export class HealthService{
 
     constructor(server){
@@ -11,8 +13,7 @@ export class HealthService{
 
     health(){
         this.server.get('/health',(req,res)=>{
-            res.writeHead(200,{'Content-Type': 'application/json'});
-            res.end("{\"status\":\"UP\"}");
+            RestUtils.writeJson(res,{status:"UP"});
         })
     }
 }

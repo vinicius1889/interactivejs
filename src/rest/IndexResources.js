@@ -1,10 +1,10 @@
-import UserService from "./UserService";
-import {HealthService} from "./Actuator"
+import UserService from "./UserResources";
+import {HealthService} from "./ActuatorResouces"
 
 
-export default class IndexServices{
+export default class IndexResources{
 
-    static createRest(server){ return new IndexServices(server);  }
+    static createRest(server){ return new IndexResources(server);  }
     constructor(server){  this.server = server;  }
 
     bindRestServices(){
