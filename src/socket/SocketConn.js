@@ -1,3 +1,4 @@
+import UserService from "../services/UserServices"
 var socketIO = require("socket.io");
 
 export default class SocketConn{
@@ -12,15 +13,15 @@ export default class SocketConn{
 
     bindConnections(){
         this.io.on('connection',(client)=>{
-            console.log("connected!!!!!!!!!!");
 
-            client.on('event', function(data){
+            client.emit('doRegistration',{});
 
+            client.on('register',(data)=> {
+                UserService.register(data,client)
             });
 
-            client.on('disconnect', function(){
+            client.on('disconnect', () => { UserService.unregister(client) });
 
-            });
         })
     }
 

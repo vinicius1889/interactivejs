@@ -1,4 +1,8 @@
 
+export var EnumCookie = {
+    INTERNAUTA_ID:"ckinternautaid"
+}
+
 export var EnumCode = {
     OK: {   code:200    }
 
@@ -7,7 +11,22 @@ export var EnumCode = {
 export class RestUtils{
 
     static writeJson(response,json){
-        response.writeHead(EnumCode.OK.code, {'Content-Type': 'application/json'})
+        RestUtils.writeJsonWithCode(response,json,EnumCode.OK);
+    }
+
+    static writeJsonWithCode(response,json,enumCode){
+        response.writeHead(enumCode.code, {'Content-Type': 'application/json'})
         response.end(JSON.stringify(json))
     }
+}
+
+export class CookieUtil{
+
+    static getInternautaId(cookie){
+        let aux = cookie.split(";").filter(s=>s.indexOf(EnumCookie.INTERNAUTA_ID)>-1);
+        try{
+            return aux[0].split("=")[1].trim(); }
+        catch(e){ return null; }
+    }
+
 }

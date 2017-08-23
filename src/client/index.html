@@ -13,6 +13,11 @@
         socket.on('event', function(data){
 
         });
+
+        socket.on('doRegistration',function(){
+            socket.emit('register',document.cookie);
+        });
+
     </script>
 </head>
 <body>
