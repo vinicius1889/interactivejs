@@ -7,10 +7,8 @@
 
     <script>
         var socket = io('http://localhost:8765');
-        socket.on('connect', function(){
 
-        });
-        socket.on('event', function(data){
+        socket.on('connect', function(){
 
         });
 
@@ -18,9 +16,21 @@
             socket.emit('register',document.cookie);
         });
 
+        socket.on('online-users',function(data){
+            console.log(data);
+            document.getElementById("onlineusers").innerText=data.length
+        });
+
+        function createRoom(socket,name,callback){
+            socket.on(name,callback)
+        }
+
+        createRoom(socket,"sala-teste",(item)=>console.log(item));
+
     </script>
 </head>
 <body>
+    <span id="onlineusers"></span>
 
 </body>
 </html>

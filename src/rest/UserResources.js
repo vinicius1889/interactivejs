@@ -1,6 +1,6 @@
 import {EnumCode} from "../utils/Utils";
 
-export default class UserService{
+export default class UserResources{
 
     constructor(server){
         this.server  = server;
@@ -8,7 +8,7 @@ export default class UserService{
     }
 
     static createServices(server){
-        return new UserService(server);
+        return new UserResources(server);
     }
 
 

@@ -30,3 +30,11 @@ export class CookieUtil{
     }
 
 }
+
+export class UserOnlineUtils{
+    static getUniqueUsersFromDocuments(documents){
+        let map = new Map();
+        documents.forEach((s) => map.set(s.key,s));
+        return map;
+    }
+}

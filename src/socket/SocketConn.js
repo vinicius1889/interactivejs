@@ -14,13 +14,16 @@ export default class SocketConn{
     bindConnections(){
         this.io.on('connection',(client)=>{
 
-            client.emit('doRegistration',{});
+            client.emit('doRegistration',null);
 
             client.on('register',(data)=> {
                 UserService.register(data,client)
             });
 
-            client.on('disconnect', () => { UserService.unregister(client) });
+            client.on('disconnect', () => {
+                UserService.unregister(client);
+            });
+
 
         })
     }

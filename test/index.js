@@ -1,7 +1,17 @@
 import http from 'http';
 import assert from 'assert';
+import {UserRepository} from  "../src/repo/Repository"
 
 import {CookieUtil} from "../src/utils/Utils"
+
+describe('Testing user repository', () => {
+
+    it('should return array of online users', done => {
+        UserRepository.findAll( (e,res)=>{console.log(res.length); done(); } )
+    });
+
+});
+
 
 describe('Testing Services', () => {
 
