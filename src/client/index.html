@@ -2,35 +2,51 @@
 <html lang="en">
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+    <script src="interactive.js"></script>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Sala 123</title>
 
     <script>
-        var socket = io('http://localhost:8765');
 
-        socket.on('connect', function(){
+        socket.on('added-new-room',function(data){
+            socket.on(data.room,function(item){
+                console.log(item)
+                document.getElementsByName('count-'+item.channel.room)[0].innerText=item.value;
+            });
+        })
 
-        });
+        setTimeout( function(){
+            var value = document.getElementsByName('anuncio_id')[0].value;
+            createRoom(socket,"sala-"+value);
+        },1000)
 
-        socket.on('doRegistration',function(){
-            socket.emit('register',document.cookie);
-        });
-
-        socket.on('online-users',function(data){
-            console.log(data);
-            document.getElementById("onlineusers").innerText=data.length
-        });
-
-        function createRoom(socket,name,callback){
-            socket.on(name,callback)
-        }
-
-        createRoom(socket,"sala-teste",(item)=>console.log(item));
+//        setTimeout(function(){
+//            createRoom(socket,"sala-5678");
+//        },3000)
 
     </script>
 </head>
 <body>
+
+<form>
+    <input type="hidden" name="anuncio_id" value="123"/>
+
+</form>
+
+<div>
+    <span>Usuarios Online:</span>
     <span id="onlineusers"></span>
+</div>
+
+<div>
+    <span>Usuarios vendo esse anuncio(123):</span>
+    <span name="count-sala-123"></span>
+</div>
+
+<div>
+    <span>Usuarios vendo esse anuncio(5678):</span>
+    <span name="count-sala-5678"></span>
+</div>
 
 </body>
 </html>

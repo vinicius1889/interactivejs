@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+    <meta charset="UTF-8">
+    <title>Sala 1234</title>
+
+    <script>
+
+        //names = anuncio_id e anunciante_id
+        var socket = io('http://localhost:8765');
+
+        socket.on('connect', function(){
+
+        });
+
+        socket.on('doRegistration',function(){
+            socket.emit('register',document.cookie);
+        });
+
+        socket.on('online-users',function(data){
+            console.log(data);
+            document.getElementById("onlineusers").innerText=data.length
+        });
+
+        function createRoom(socket,name,callback){
+            socket.on(name,callback)
+        }
+
+        createRoom(socket,"sala-teste-1234",(item)=>console.log(item));
+
+    </script>
+</head>
+<body>
+
+<div>
+    <span>Usuarios Online:</span>
+    <span id="onlineusers"></span>
+</div>
+
+<div>
+    <span>Usuarios vendo esse anuncio:</span>
+    <span name="count-sala-teste-1234"></span>
+</div>
+
+</body>
+</html>
