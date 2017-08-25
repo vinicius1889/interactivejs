@@ -12,7 +12,7 @@
             console.log(data)
             socket.on(data.room,function(item){
                 console.log(item)
-                //document.getElementsByName('count-'+item.channel.room)[0].innerText=item.value;
+                document.getElementsByName('count-'+item.channel.room)[0].innerText=item.value;
             });
         })
 

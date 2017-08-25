@@ -25,18 +25,15 @@ export default class SocketConn{
 
             client.on('disconnect', () => {
                 UserService.unregister(client);
-            });
 
+            });
 
             client.on('new-room',(data)=>{
                 RoomService.openRoom(data,client[UserOnlineUtils.key]);
-
                 setTimeout( () =>{
                                 client.emit('added-new-room',data);
                                 RoomService.totalUsersInRoom(data.room,client)
                             },1000);
-
-
             })
 
 

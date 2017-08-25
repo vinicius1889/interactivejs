@@ -24,6 +24,11 @@ export class RoomsRepository{
         return model.findOne({"name":name});
     }
 
+    static findRoomById(id){
+        let model = RoomsRepository.getModel();
+        return model.findById(id);
+    }
+
 
 
 

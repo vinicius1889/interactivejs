@@ -2,28 +2,11 @@ import http from 'http';
 import assert from 'assert';
 import {UserRepository} from  "../src/repo/Repository"
 import RoomService from  "../src/services/RoomService"
+import UserServices from  "../src/services/UserServices"
 
 import {CookieUtil,UserOnlineUtils} from "../src/utils/Utils"
 
-describe('Testing room service', () => {
-
-    it('should add a user in a room', done => {
-
-        let user = {
-            "_id" : "599f57aa0e07a9cd3d01c15b",
-            "key" : "123456",
-            "rooms" : [],
-            "anuncios" : []
-        };
-        let room = {"room":"sala-teste-5858","key":"5858"};
-        let aux = [];
-        aux[UserOnlineUtils.key] = user;
-
-        RoomService.openRoom(room, aux).then( ()=> done() )
-
-    });
-
-
+describe.skip('Testing room service', () => {
 
     it.skip('should find a user by id', done => {
         let user = {
@@ -46,22 +29,36 @@ describe('Testing room service', () => {
 });
 
 
-describe.skip('Testing user repository', () => {
+describe('Testing user repository', () => {
 
-    it('should return array of online users', done => {
-        UserRepository.findAll( (e,res)=>{console.log(res.length); done(); } )
+    it.skip('should return array of online users', done => {
+        UserRepository.findAll( (e,res)=>{assert.ok(res.length>0); done(); } )
     });
 
-    it('should return user by id', done => {
-        UserRepository.findById("599f06909b2e0b704455894a" )
-            .then(s=>{ console.log("danzig"); console.log(s); done();} )
+    it.skip('should return user by id', done => {
+        UserRepository.findById("59a069aeac7efb664c32552a")
+            .then(s=>{console.log(s); assert.ok(s!=null); done();} )
+    });
+
+    it('should delete user in room', done => {
+        let user = {
+                        _id: '59a069aeac7efb664c32552a',
+                        key: '123456',
+                        __v: 1,
+                        rooms: [ "59a069afac7efb664c32552b" ],
+                        anuncios: []
+                    };
+
+        UserServices
+            .removeOnlineUser(user._id)
+            .then( () => done() )
+            ;
+
+            // .then(s=>{console.log(s); done();} )
     });
 
 
-    it('should return user by id', done => {
-        UserRepository.updateUserRooms(null,null )
-            .then(s=>{ console.log("teste"); console.log(s); done();} )
-    });
+
 
 });
 

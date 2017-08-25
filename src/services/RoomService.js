@@ -1,6 +1,7 @@
 /**
  * Created by vinicius on 24/08/17.
  */
+var mongoose = require("mongoose");
 
 import {UserDomain} from "../model/Models"
 import {CookieUtil,UserOnlineUtils}  from '../utils/Utils'
@@ -30,6 +31,24 @@ export default class RoomService{
                         UserRepository.updateUserRooms(userAux,room);
                 });
 
+    }
+
+    static deleteUserInRoom(usuario,roomId){
+
+
+            RoomsRepository
+                    .findRoomById(roomId)
+                            .then( (room) => {
+                                let aux = new Array();
+                                room.users.forEach( r => {
+
+                                    if( !mongoose.Types.ObjectId(r._id).equals(usuario._id) ){
+                                        aux.push(r);
+                                    }
+                                })
+                                room.users=aux;
+                                room.save();
+                            });
     }
 
 }
