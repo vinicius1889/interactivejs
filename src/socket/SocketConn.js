@@ -1,5 +1,7 @@
 import UserService from "../services/UserServices"
 import RoomService from "../services/RoomService"
+import {UserOnlineUtils} from "../utils/Utils"
+
 var socketIO = require("socket.io");
 
 export default class SocketConn{
@@ -27,9 +29,14 @@ export default class SocketConn{
 
 
             client.on('new-room',(data)=>{
-                let channel = RoomService.openRoom(data,client);
-                client.emit('added-new-room',channel);
-                setInterval(()=>{client.emit(channel.room,{value:new Date().getTime(), channel:channel})},5000);
+                RoomService.openRoom(data,client[UserOnlineUtils.key]);
+
+                setTimeout( () =>{
+                                client.emit('added-new-room',data);
+                                RoomService.totalUsersInRoom(data.room,client)
+                            },1000);
+
+
             })
 
 

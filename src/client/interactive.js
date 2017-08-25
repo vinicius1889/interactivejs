@@ -17,8 +17,8 @@ socket.on('online-users',function(data){
     document.getElementById("onlineusers").innerText=data.length
 });
 
-function createRoom(socket,name){
-    var data = {room:name}
+function createRoom(socket,name,key){
+    var data = {room:name,key:key}
     socket.emit("new-room",data);
 }
 

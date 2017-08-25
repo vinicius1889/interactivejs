@@ -32,6 +32,7 @@ export class CookieUtil{
 }
 
 export class UserOnlineUtils{
+    static key = "refIcarros"
     static getUniqueUsersFromDocuments(documents){
         let map = new Map();
         documents.forEach((s) => map.set(s.key,s));

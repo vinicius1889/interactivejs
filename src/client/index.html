@@ -9,15 +9,16 @@
     <script>
 
         socket.on('added-new-room',function(data){
+            console.log(data)
             socket.on(data.room,function(item){
                 console.log(item)
-                document.getElementsByName('count-'+item.channel.room)[0].innerText=item.value;
+                //document.getElementsByName('count-'+item.channel.room)[0].innerText=item.value;
             });
         })
 
         setTimeout( function(){
             var value = document.getElementsByName('anuncio_id')[0].value;
-            createRoom(socket,"sala-"+value);
+            createRoom(socket,"sala-"+value,value);
         },1000)
 
 //        setTimeout(function(){
