@@ -12,18 +12,22 @@
             console.log(data)
             socket.on(data.room,function(item){
                 console.log(item)
-                document.getElementsByName('count-'+item.channel.room)[0].innerText=item.value;
+                document.getElementsByName('count-'+item.room)[0].innerText=item.total;
             });
-        })
+        });
 
         setTimeout( function(){
             var value = document.getElementsByName('anuncio_id')[0].value;
             createRoom(socket,"sala-"+value,value);
-        },1000)
+        },1000);
 
-//        setTimeout(function(){
-//            createRoom(socket,"sala-5678");
-//        },3000)
+        function createRoom1(){
+            createRoom(socket,"sala-1",1);
+        }
+
+        function createRoom2(){
+            createRoom(socket,"sala-2",2);
+        }
 
     </script>
 </head>
@@ -45,8 +49,13 @@
 </div>
 
 <div>
-    <span>Usuarios vendo esse anuncio(5678):</span>
-    <span name="count-sala-5678"></span>
+    <span>Usuarios vendo esse anuncio(1):</span>
+    <span name="count-sala-1"></span>
+</div>
+
+<div>
+    <span>Usuarios vendo esse anuncio(2):</span>
+    <span name="count-sala-2"></span>
 </div>
 
 </body>

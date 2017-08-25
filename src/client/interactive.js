@@ -14,6 +14,7 @@ socket.on('doRegistration',function(){
 });
 
 socket.on('online-users',function(data){
+    console.log(data)
     document.getElementById("onlineusers").innerText=data.length
 });
 
