@@ -33,6 +33,12 @@ export default class RoomService{
 
     }
 
+    static closeRoom(data,userAux){
+        return RoomsRepository
+                    .remove(data.room,userAux)
+
+    }
+
     static deleteUserInRoom(usuario,roomId){
 
 

@@ -34,7 +34,16 @@ export default class SocketConn{
                                 client.emit('added-new-room',data);
                                 RoomService.totalUsersInRoom(data.room,client)
                             },1000);
+            });
+
+
+            client.on('remove-room',(data)=>{
+                RoomService.closeRoom(data,client[UserOnlineUtils.key])
+                                .then( ()=> RoomService.totalUsersInRoom(data.room,client) );
+
             })
+
+            setInterval( ()=> RoomService.totalUsersInRoom('sala-1',client), 2000 )
 
 
 

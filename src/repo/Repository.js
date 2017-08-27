@@ -29,6 +29,15 @@ export class RoomsRepository{
         return model.findById(id);
     }
 
+    static remove(roomName, userAux){
+        return RoomsRepository.findRoomByName(roomName).then( (room)=>{
+            let auxUsers = room.users.filter( (u)=> !mongoose.Types.ObjectId(userAux._id).equals(u._id));
+            auxUsers = auxUsers.filter( (u)=> u.key!=auxUsers.key);
+            room.users=auxUsers;
+            room.save();
+        } )
+    }
+
 
 
 
@@ -36,15 +45,23 @@ export class RoomsRepository{
 
         return RoomsRepository.findRoomByName(roomAux.room).then( (roomName)=>{
             let model = RoomsRepository.getModel();
+            let userAux = RoomsRepository.getUserPropsToRoomsCollections(user);
             if(roomName == null){
-                let auxObj = {"name":roomAux.room, "key":roomAux.key, "users":new Array(user)};
+                let auxObj = {"name":roomAux.room, "key":roomAux.key, "users":new Array(userAux)};
                 let aux = new model(auxObj);
                 return aux.save();
             }else{
-                roomName.users.push(user);
+                roomName.users.push(userAux);
                 return roomName.save();
             }
         });
+    }
+
+    static getUserPropsToRoomsCollections(userModel){
+        return {
+            key: userModel.key,
+            _id: userModel._id
+        }
     }
 
 
