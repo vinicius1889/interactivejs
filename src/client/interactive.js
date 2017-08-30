@@ -2,7 +2,7 @@
  * Created by vinicius on 24/08/17.
  */
 
-    //names = anuncio_id e anunciante_id
+//names = anuncio_id e anunciante_id
 var socket = io('http://localhost:8765');
 
 socket.on('connect', function(){

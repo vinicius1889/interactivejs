@@ -1,7 +1,7 @@
 {
   "name": "example-node-server",
   "version": "1.0.0",
-  "description": "Example Node Server w/ Babel",
+  "description": "Example interactive user nodejs microservice with socket.io",
   "main": "src/index.js",
   "scripts": {
     "start": "nodemon src/index.js --exec babel-node --presets es2015,stage-2",

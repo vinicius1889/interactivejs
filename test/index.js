@@ -29,7 +29,7 @@ describe.skip('Testing room service', () => {
 });
 
 
-describe('Testing user repository', () => {
+describe.skip('Testing user repository', () => {
 
     it.skip('should return array of online users', done => {
         UserRepository.findAll( (e,res)=>{assert.ok(res.length>0); done(); } )

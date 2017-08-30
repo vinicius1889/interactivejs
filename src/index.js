@@ -4,7 +4,7 @@ var server = require('http').Server(app);
 import SocketConnections from "./socket/SocketConn"
 //rest  services
 import IndexServices from "./rest/IndexResources"
-
+//king sze
 //initializing sockets
 SocketConnections.createSocketConnections(server).bindConnections();
 //initializing services
