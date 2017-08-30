@@ -6,58 +6,23 @@ import UserServices from  "../src/services/UserServices"
 
 import {CookieUtil,UserOnlineUtils} from "../src/utils/Utils"
 
-describe.skip('Testing room service', () => {
 
-    it.skip('should find a user by id', done => {
+
+describe('Testing room service', () => {
+
+
+    it('should remove a user in a room',done => {
+        let data = {
+            room:"sala-1"
+        }
+
         let user = {
-            "_id" : "599f06909b2e0b704455894a",
-            "key" : "123456",
-            "anuncios" : [],
-            "__v" : 0
-        };
-        UserRepository.findById(user._id)
-                        .then( (s) => {
-                                console.log("RR");
-                                console.log(s);
-                                done();
-                        })
+            "key" : null,
+            "_id" : "59a21ff1359ed1257c7fb708"
+        }
 
-    });
-
-
-
-});
-
-
-describe.skip('Testing user repository', () => {
-
-    it.skip('should return array of online users', done => {
-        UserRepository.findAll( (e,res)=>{assert.ok(res.length>0); done(); } )
-    });
-
-    it.skip('should return user by id', done => {
-        UserRepository.findById("59a069aeac7efb664c32552a")
-            .then(s=>{console.log(s); assert.ok(s!=null); done();} )
-    });
-
-    it('should delete user in room', done => {
-        let user = {
-                        _id: '59a069aeac7efb664c32552a',
-                        key: '123456',
-                        __v: 1,
-                        rooms: [ "59a069afac7efb664c32552b" ],
-                        anuncios: []
-                    };
-
-        UserServices
-            .removeOnlineUser(user._id)
-            .then( () => done() )
-            ;
-
-            // .then(s=>{console.log(s); done();} )
-    });
-
-
+        RoomService.closeRoom(data,user);
+    })
 
 
 });

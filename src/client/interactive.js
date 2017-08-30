@@ -23,4 +23,10 @@ function createRoom(socket,name,key){
     socket.emit("new-room",data);
 }
 
+function removeRoom(socket,name){
+    var data = {room:name}
+    socket.emit("remove-room",data);
+    socket.removeListener(name);
+}
+
 
