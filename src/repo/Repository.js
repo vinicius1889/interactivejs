@@ -1,13 +1,17 @@
 var mongoose = require("mongoose");
 import {IUser,IRooms} from "../model/Models"
 import UserServices from "../services/UserServices"
+import {Config} from "../config/Config"
 
-mongoose.connect('mongodb://172.17.0.2:27017/interactive_user');
+var config = new Config().getConfig();
+
+mongoose.connect(`mongodb://${config.mongodb.host}:${config.mongodb.port}/${config.database}`);
 var db = mongoose.connection;
+
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
     console.log("opened connnection!!!")
-})
+});
 
 export class RoomsRepository{
     static SCHEMA = null;

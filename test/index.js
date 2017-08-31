@@ -6,9 +6,39 @@ import UserServices from  "../src/services/UserServices"
 
 import {CookieUtil,UserOnlineUtils} from "../src/utils/Utils"
 
+import {Cipher , Config, ConfigEnum, CommandLineVariables} from "../src/config/Config";
+
+var fs = require('fs');
 
 
-describe('Testing room service', () => {
+
+describe('Test config', () => {
+
+
+    it('should get command line variables',done => {
+        let cmd = CommandLineVariables.getVariables();
+        console.log(cmd);
+        done();
+    });
+
+});
+
+
+describe.skip('Testing cipher', () => {
+
+    it('should cipher/decipher  a string',done => {
+        let cipher = new Cipher();
+        let frase = cipher.encrypt("{nome:'vinicius'}");
+        console.log(frase);
+        assert.equal(cipher.decrypt(frase),"{nome:'vinicius'}");
+        done();
+    });
+
+
+});
+
+
+describe.skip('Testing room service', () => {
 
 
     it('should remove a user in a room',done => {
