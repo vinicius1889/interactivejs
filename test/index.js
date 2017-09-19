@@ -12,7 +12,7 @@ var fs = require('fs');
 
 
 
-describe('Test config', () => {
+describe.skip('Test config', () => {
 
 
     it('should get command line variables',done => {
@@ -24,13 +24,21 @@ describe('Test config', () => {
 });
 
 
-describe.skip('Testing cipher', () => {
+describe('Testing file_to_cipher.txt', () => {
 
-    it('should cipher/decipher  a string',done => {
+    it('should file_to_cipher.txt/decipher  a string',done => {
+        let config = {
+            "mongodb":{
+                "host":"172.17.0.2",
+                "port":"27017",
+                "database":"interactive_user"
+            }
+        };
+
         let cipher = new Cipher();
-        let frase = cipher.encrypt("{nome:'vinicius'}");
+        let frase = cipher.encrypt( JSON.stringify(config) );
         console.log(frase);
-        assert.equal(cipher.decrypt(frase),"{nome:'vinicius'}");
+        assert.equal(cipher.decrypt(frase),JSON.stringify(config));
         done();
     });
 

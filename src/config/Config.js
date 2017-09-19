@@ -46,6 +46,9 @@ export class Config{
     }
 
     getConfig(){
+        console.log("reading...");
+        console.log(this.file);
+
         let data = fs.readFileSync(this.file, 'utf8');
         if(CommandLineVariables.isDev())
             return JSON.parse(data)
@@ -56,9 +59,10 @@ export class Config{
 
 export class Cipher{
 
-    constructor(){
-        this.algorithm = 'aes-256-ctr',
-        this.password  = CommandLineVariables.getVariables().icarroskey;
+    constructor(key){
+        key===undefined? this.password = CommandLineVariables.getVariables().icarroskey:
+                         this.password = key;
+        this.algorithm = 'aes-256-ctr';
         this.cipher     =  crypto.createCipher(this.algorithm,this.password);
         this.decipher   =  crypto.createDecipher(this.algorithm,this.password);
     }
