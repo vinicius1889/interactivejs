@@ -62,7 +62,9 @@ export class Cipher{
     constructor(key){
         key===undefined? this.password = CommandLineVariables.getVariables().icarroskey:
                          this.password = key;
+        console.log(this.password)
         this.algorithm = 'aes-256-ctr';
+
         this.cipher     =  crypto.createCipher(this.algorithm,this.password);
         this.decipher   =  crypto.createDecipher(this.algorithm,this.password);
     }

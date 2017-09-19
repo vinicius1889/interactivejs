@@ -6,19 +6,27 @@ var prompt = require('prompt');
 class CipherTool{
 
     constructor(){
-        this.password="d6F3Efeq";
-        this.algorithm = 'aes-256-ctr';
+        this.cipher     =   null;
+        this.decipher   =   null;
+        this.password   =   null;
+        this.algorithm  =   'aes-256-ctr';
+
+    }
+
+    createCipher(){
         this.cipher     =  crypto.createCipher(this.algorithm,this.password);
         this.decipher   =  crypto.createDecipher(this.algorithm,this.password);
     }
 
     encrypt(text){
+        this.createCipher();
         let crypted = this.cipher.update(text,'utf8','hex')
         crypted += this.cipher.final('hex');
         return crypted;
     }
 
     decrypt(text){
+        this.createCipher();
         var dec = this.decipher.update(text,'hex','utf8')
         dec += this.decipher.final('utf8');
         return dec;
@@ -36,7 +44,9 @@ class CipherTool{
                 console.log(err);
 
             else if(result!=null) {
+
                 self.password = result.password;
+                console.log(self.password)
                 let encrypted = self.encrypt(data)
                 console.log("Encrypted:")
                 console.log(encrypted);

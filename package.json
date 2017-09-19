@@ -4,14 +4,14 @@
   "description": "Example interactive user nodejs microservice with socket.io",
   "main": "src/index.js",
   "scripts": {
-    "start": "nodemon src/index.js --exec babel-node --presets es2015,stage-2 icarroskey=d6F3Efeq env=PROD",
-    "build": "babel src -d dist",
+    "start": "nodemon src/index.js --exec babel-node --presets es2015,stage-2 icarroskey=rabinho env=PROD",
+    "build": "babel src --out-dir lib --source-maps inline --copy-files",
     "serve": "node dist/index.js",
     "test": "mocha environment=dev password=d6F3Efeq --compilers js:babel-register "
   },
   "author": "Vinicius Dias",
   "devDependencies": {
-    "babel-cli": "^6.11.4",
+    "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-stage-2": "^6.11.0",
     "babel-register": "^6.11.6",
